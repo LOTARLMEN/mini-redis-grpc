@@ -12,3 +12,9 @@ dependencies = [
 dev = [
     "mypy-protobuf>=5.1.0",
 ]
+
+[tool.ruff]
+extend-exclude = ["src/generated"]
+
+[tool.ruff.format]
+exclude = ["src/generated"]
