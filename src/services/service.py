@@ -36,8 +36,8 @@ class MiniRedisService(KeyValueStoreServicer):
 
         value, deadline = self.memory[request.key]
         if deadline is not None and deadline < time.monotonic():
-            delete_request = kpb2.DeleteRequest(key=request.key)
-            self.Delete(delete_request, context)
+            self.memory.pop(request.key, None)
+
             context.set_code(grpc.StatusCode.NOT_FOUND)
             return kpb2.GetResponse()
         self.memory.move_to_end(request.key)
@@ -63,8 +63,7 @@ class MiniRedisService(KeyValueStoreServicer):
                 else:
                     response.items.append(kpb2.KeyValue(key=key, value=val))
 
-        for item in expired_keys:
-            delete_request = kpb2.DeleteRequest(key=item)
-            self.Delete(delete_request, context)
+        for key in expired_keys:
+            self.memory.pop(key, None)
 
         return response
