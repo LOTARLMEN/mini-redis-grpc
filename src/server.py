@@ -16,7 +16,6 @@ def serve():
     server.add_insecure_port(listen_addr)
 
     server.start()
-
     server.wait_for_termination()
 
 
