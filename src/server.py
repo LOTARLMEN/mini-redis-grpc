@@ -2,10 +2,9 @@ from concurrent import futures
 
 import grpc
 
+from src.config.config import settings
 from src.generated.kvstore_pb2_grpc import add_KeyValueStoreServicer_to_server
 from src.services.service import MiniRedisService
-
-from src.config.config import settings
 
 
 def serve():
