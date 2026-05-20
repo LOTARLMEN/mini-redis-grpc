@@ -19,7 +19,7 @@ class GRPCServer(BaseModel):
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         env_file=ENV_FILE,
-        env_nested_delimiter="__",
+        env_nested_delimiter="_",
         env_ignore_empty=True,
     )
 
